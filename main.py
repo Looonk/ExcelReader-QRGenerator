@@ -9,8 +9,8 @@ files = os.listdir("./in/"+folder[0])
 os.chdir("./in/"+folder[0]+"/")
 for f in files:
     if f.endswith(".xls") or f.endswith(".XLS"):
-        df = pd.read_excel(f, usecols="B,D", keep_default_na=False, engine='xlrd')
-        # df = pd.read_excel(f, usecols="A,G", keep_default_na=False, engine='xlrd')
+        # df = pd.read_excel(f, usecols="B,D", keep_default_na=False, engine='xlrd')
+        df = pd.read_excel(f, usecols="A,G", keep_default_na=False, engine='xlrd')
         for i in df.itertuples():
             if not i.__contains__(""):
                 if i.__getattribute__("_2").__contains__("\""):
@@ -50,6 +50,6 @@ for f in files:
                 os.remove("../../output/" + folder[0] + "/" + str(f)[:-4] + "/" + name[:-4] + " not.png")
                 os.remove("../../output/" + folder[0] + "/" + str(f)[:-4] + "/" + name[:-4] + " bg.png")
 
-        os.remove("../../output/" + folder[0] + "/" + str(f)[:-4] + "/Código - Descripción.png")
+        #os.remove("../../output/" + folder[0] + "/" + str(f)[:-4] + "/Código - Descripción.png")
 os.chdir("../../")
 shutil.make_archive("./output/" + folder[0], 'zip', "./output/" + folder[0])

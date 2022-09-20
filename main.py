@@ -13,17 +13,21 @@ for f in files:
         #df = pd.read_excel(f, usecols="A,G", keep_default_na=False, engine="xlrd")
         for i in df.itertuples():
             if not i.__contains__(""):
+                if str(i.__getattribute__("_1")).__contains__("*"):
+                    aux = str(i.__getattribute__("_1")).replace("*", "")
+                else:
+                    aux = str(i.__getattribute__("_1"))
                 if i.__getattribute__("_2").__contains__("\""):
                     a = i.__getattribute__("_2").replace("\"", " PULGADAS ")
-                    name = str(i.__getattribute__("_1")) + " - " + a + ".jpg"
+                    name = aux + " - " + a + ".jpg"
                 elif i.__getattribute__("_2").__contains__("´´"):
                     a = i.__getattribute__("_2").replace("´´", " PULGADAS")
-                    name = str(i.__getattribute__("_1")) + " - " + a + ".jpg"
+                    name = aux + " - " + a + ".jpg"
                 elif i.__getattribute__("_2").__contains__("/"):
                     a = i.__getattribute__("_2").replace("/", "ON")
-                    name = str(i.__getattribute__("_1")) + " - " + a + ".jpg"
+                    name = aux + " - " + a + ".jpg"
                 else:
-                    name = str(i.__getattribute__("_1")) + " - " + i.__getattribute__("_2") + ".jpg"
+                    name = aux + " - " + i.__getattribute__("_2") + ".jpg"
                 img = qrcode.make(i.__getattribute__("_1"))
                 os.makedirs("../../output", exist_ok=True)
                 os.makedirs("../../output/" + folder[0] + "/" + str(f)[:-4], exist_ok=True)

@@ -30,6 +30,7 @@ for f in files:
                     name = aux + " - " + i.__getattribute__("_2") + ".jpg"
                 img = qrcode.make(i.__getattribute__("_1"))
                 os.makedirs("../../output", exist_ok=True)
+                os.makedirs("../../output/" + folder[0], exist_ok=True)
                 os.makedirs("../../output/" + folder[0] + "/" + str(f)[:-4], exist_ok=True)
                 img.save("../../output/" + folder[0] + "/" + str(f)[:-4] + "/" + name)
 
@@ -53,7 +54,8 @@ for f in files:
                 os.remove("../../output/" + folder[0] + "/" + str(f)[:-4] + "/" + name)
                 os.remove("../../output/" + folder[0] + "/" + str(f)[:-4] + "/" + name[:-4] + " not.png")
                 os.remove("../../output/" + folder[0] + "/" + str(f)[:-4] + "/" + name[:-4] + " bg.png")
-
-        os.remove("../../output/" + folder[0] + "/" + str(f)[:-4] + "/Código - Descripción.png")
+        desc = os.listdir("../../output/" + folder[0] + "/" + str(f)[:-4] + "/")
+        if desc.__contains__("Código - Descripción.png"):
+            os.remove("../../output/" + folder[0] + "/" + str(f)[:-4] + "/Código - Descripción.png")
 os.chdir("../../")
 shutil.make_archive("./output/" + folder[0], "zip", "./output/" + folder[0])
